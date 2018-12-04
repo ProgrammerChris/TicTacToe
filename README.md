@@ -1,3 +1,3 @@
 # TicTacToe.py
 
-Simple "tic tac toe" with pygame in python 3.6.
+Simple "tic tac toe" using pygame in python 3.6.
