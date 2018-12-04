@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 import pygame
 
 # TODO: Write win check
@@ -40,7 +42,6 @@ while running:
         
         if event.type == pygame.QUIT:
             running = False
-
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
