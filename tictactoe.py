@@ -37,8 +37,14 @@ running = True
 while running:
     
     for event in pygame.event.get():
+        
         if event.type == pygame.QUIT:
             running = False
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
+
         if event.type == 6:
             for square in grid:
                 if square.collidepoint(event.pos) and square not in squares_taken:
@@ -55,5 +61,7 @@ while running:
                     whos_turn = whos_turn ^ 1
 
                 pygame.display.flip()
+
+pygame.quit()
 
             
