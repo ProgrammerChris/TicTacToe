@@ -52,27 +52,25 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 running = False
 
-        if event.type == 6:
+        if event.type == pygame.MOUSEBUTTONUP:
             for square in grid:
-                
                 if square.collidepoint(event.pos) and board[grid.index(square)] == '-':
                     if whos_turn == 0:
                         # Draw X
                         pygame.draw.line(screen, (255,255,255), (square[0] + 50, square[1] + 50), (square[0] + 150, square[1] + 150), 15)
                         pygame.draw.line(screen, (255,255,255), (square[0] + 50, square[1] + 150), (square[0] + 150, square[1] + 50), 15)
-                        brick_placed = 'X'
+                        board[grid.index(square)] = 'X'
                     else:
                         # Draw O
                         pygame.draw.circle(screen, (255,255,255), (square[0] + 100, square[1] + 100), 70, 10)
-                        brick_placed = 'O'
+                        board[grid.index(square)] = 'O'
 
-                    # Place X or O on board
-                    board[grid.index(square)] = brick_placed
+                    # Print board to console. Just because.
+                    print(str(board[:3]) + "\n" + str(board[3:6]) + "\n" + str(board[6:9]))
                     
+                    # Switch turns between X and O
                     whos_turn = whos_turn ^ 1
 
                 pygame.display.flip()
 
 pygame.quit()
-
-            
