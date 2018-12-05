@@ -3,7 +3,8 @@
 import pygame
 import os
 
-# TODO: Display winner and close or restart game
+# TODO: Put stuff in different functions. Classes even?
+# TODO: Refactor variable and function names
 
 pygame.init()
 
@@ -11,8 +12,10 @@ pygame.init()
 fps = 30
 clock = pygame.time.Clock()
 
+# Window size
 size = width, height = 600, 600
 
+# Initiate window and ad title
 screen = pygame.display.set_mode(size)
 screen.fill([255, 255, 255])
 pygame.display.set_caption('Tic Tac Toe')
@@ -20,7 +23,8 @@ pygame.display.set_caption('Tic Tac Toe')
 # binary representation of players. 0 == X, 1 == O
 whos_turn = 0
 
-# Grid
+# Grid to be drawn
+# TODO: Draw white lines instead of using 199?...
 grid =    (
                 pygame.Rect(0, 0, 199, 199), pygame.Rect(200, 0, 199, 199), pygame.Rect((400, 0, 199, 199)), # Top row
                 pygame.Rect((0, 200, 199, 199)), pygame.Rect(200, 200, 199, 199), pygame.Rect(400, 200, 199, 199), # Middle row
@@ -28,6 +32,7 @@ grid =    (
                 )
 
 # Current board
+# TODO: Is a "2D-array" mor or less memory efficient? Google it!
 board = [
         '_', '_', '_',
         '_', '_', '_',
@@ -87,8 +92,8 @@ def check_result():
         font_buttons = pygame.font.SysFont('Areal', 22)
 
         # Restart button
-        restart_rect = pygame.Rect(180, 300, 100, 40)
-        pygame.draw.rect(screen, (125, 255, 125), restart_rect, 0)
+        replay_rect = pygame.Rect(180, 300, 100, 40)
+        pygame.draw.rect(screen, (125, 255, 125), replay_rect, 0)
         screen.blit(font_buttons.render('Replay', True, (0,0,0)), (205, 312))
         
         # Quit button
@@ -97,7 +102,7 @@ def check_result():
         screen.blit(font_buttons.render('Quit', True, (0,0,0)), (355, 312))
 
         # Button actions
-        if restart_rect.collidepoint(event.pos):
+        if replay_rect.collidepoint(event.pos):
             # Re-initialize "board" to keep track of winner or draw
             for i in range(len(board)):
                 board[i] = '_'
@@ -122,7 +127,7 @@ def check_result():
 while running:
     # CPU Usage control
     clock.tick(fps)
-    
+
     for event in pygame.event.get():
 
         # Quit if 'X' pressed on window or if 'ESC' is pressed
@@ -150,10 +155,10 @@ while running:
                         board[grid.index(square)] = 'O'
 
                     # Clears terminal to show board more nicely in console as it updates. Unix/linux and windows friendly.
-                    os.system('cls' if os.name=='nt' else 'clear')
+                    # os.system('cls' if os.name=='nt' else 'clear')
 
                     # Print board to console. Just because.
-                    print(str(board[:3]) + "\n" + str(board[3:6]) + "\n" + str(board[6:9]))
+                    # print(str(board[:3]) + "\n" + str(board[3:6]) + "\n" + str(board[6:9]))
 
                     pygame.display.update(square)
 
@@ -162,11 +167,3 @@ while running:
                     # Switch turns between X and O
                     whos_turn = whos_turn ^ 1
 pygame.quit()
-                
-
-    
-
-
-
-
-
