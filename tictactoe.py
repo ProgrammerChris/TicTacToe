@@ -67,14 +67,16 @@ def check_result():
         # TODO: Write text and make 2 buttons inside for exit and restart!
 
     if winner != '':
-        result = 'Winner is: %s!'%winner if winner != 'Draw!' else winner
+        result = '%s wins!'%winner if winner != 'Draw!' else winner
         # Draw ractangle for winner announcement
         pygame.draw.rect(screen, (122, 122, 122), pygame.Rect(150, 250, 300, 100), 0)
+
         # Font for displaying result
         font_result = pygame.font.SysFont('Arial', 25)
+
         # Display result in rectangle area
         if result != 'Draw!':
-            screen.blit(font_result.render(result, True, (240,240,240)), (225, 260)) # If winner, to center text in rectangle
+            screen.blit(font_result.render(result, True, (240,240,240)), (260, 260)) # If winner, to center text in rectangle
         else:
             screen.blit(font_result.render(result, True, (240,240,240)), (265, 260)) # If draw, to center text in rectangle
         
@@ -83,12 +85,12 @@ def check_result():
         # Restart button
         restart_rect = pygame.Rect(180, 300, 100, 40)
         pygame.draw.rect(screen, (125, 255, 125), restart_rect, 0)
-        screen.blit(font_buttons.render('Restart', True, (0,0,0)), (210, 312))
+        screen.blit(font_buttons.render('Replay', True, (0,0,0)), (205, 312))
         
         # Quit button
         quit_rect = pygame.Rect(320, 300, 100, 40)
         pygame.draw.rect(screen, (255, 125, 125), quit_rect, 0)
-        screen.blit(font_buttons.render('Quit', True, (0,0,0)), (357, 312))
+        screen.blit(font_buttons.render('Quit', True, (0,0,0)), (355, 312))
 
         # Button actions
         if restart_rect.collidepoint(event.pos):
