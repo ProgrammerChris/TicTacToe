@@ -23,8 +23,12 @@ grid =    (
                 pygame.Rect(0, 400, 200, 200), pygame.Rect(200, 400, 200, 200), pygame.Rect((400, 400, 200, 200)) # Bottom row
                 )
 
-# Keep track of occupied squares
-squares_taken = []
+# Current board
+board = [
+        '-', '-', '-',
+        '-', '-', '-',
+        '-', '-', '-'
+        ]
 
 # Drawing grid
 for square in grid:
@@ -35,6 +39,8 @@ pygame.display.flip()
 
 # Keep display showing until closed.
 running = True
+
+brick_placed = ''
 
 while running:
     
@@ -48,16 +54,20 @@ while running:
 
         if event.type == 6:
             for square in grid:
-                if square.collidepoint(event.pos) and square not in squares_taken:
+                
+                if square.collidepoint(event.pos) and board[grid.index(square)] == '-':
                     if whos_turn == 0:
                         # Draw X
                         pygame.draw.line(screen, (255,255,255), (square[0] + 50, square[1] + 50), (square[0] + 150, square[1] + 150), 15)
                         pygame.draw.line(screen, (255,255,255), (square[0] + 50, square[1] + 150), (square[0] + 150, square[1] + 50), 15)
+                        brick_placed = 'X'
                     else:
                         # Draw O
                         pygame.draw.circle(screen, (255,255,255), (square[0] + 100, square[1] + 100), 70, 10)
-                        
-                    squares_taken.append(square)
+                        brick_placed = 'O'
+
+                    # Place X or O on board
+                    board[grid.index(square)] = brick_placed
                     
                     whos_turn = whos_turn ^ 1
 
