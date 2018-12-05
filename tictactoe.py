@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import pygame
+import os
 
 # TODO: Write win check
 # TODO: Display winner and close or restart game
@@ -40,30 +41,34 @@ pygame.display.flip()
 # Keep display showing until closed.
 running = True
 
-brick_placed = ''
-
 while running:
     
     for event in pygame.event.get():
         
+        # Quit if 'X' pressed on window or if 'ESC' is pressed
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
 
+        # If mouse clicked
         if event.type == pygame.MOUSEBUTTONUP:
             for square in grid:
+                # Check which square is being clicked
                 if square.collidepoint(event.pos) and board[grid.index(square)] == '-':
                     if whos_turn == 0:
-                        # Draw X
+                        # Draw X in square
                         pygame.draw.line(screen, (255,255,255), (square[0] + 50, square[1] + 50), (square[0] + 150, square[1] + 150), 15)
                         pygame.draw.line(screen, (255,255,255), (square[0] + 50, square[1] + 150), (square[0] + 150, square[1] + 50), 15)
                         board[grid.index(square)] = 'X'
                     else:
-                        # Draw O
+                        # Draw O in square
                         pygame.draw.circle(screen, (255,255,255), (square[0] + 100, square[1] + 100), 70, 10)
                         board[grid.index(square)] = 'O'
+
+                    # Clears terminal to show board more nicely as it updates. Unix/linux and windows friendly.
+                    os.system('cls' if os.name=='nt' else 'clear')
 
                     # Print board to console. Just because.
                     print(str(board[:3]) + "\n" + str(board[3:6]) + "\n" + str(board[6:9]))
