@@ -7,6 +7,10 @@ import os
 
 pygame.init()
 
+# To reduce CPU Usage! Without this, one core will be used quite heavily
+fps = 30
+clock = pygame.time.Clock()
+
 size = width, height = 600, 600
 
 screen = pygame.display.set_mode(size)
@@ -116,6 +120,9 @@ def check_result():
         return True
         
 while running:
+    # CPU Usage control
+    clock.tick(fps)
+    
     for event in pygame.event.get():
 
         # Quit if 'X' pressed on window or if 'ESC' is pressed
