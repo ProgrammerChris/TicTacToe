@@ -20,5 +20,5 @@ setup(
     'excludes': excludes,
     'include_msvcr': True,
 }},
-executables = [Executable("tictactoe.py", base=base)]
+executables = [Executable("main.py", base=base)]
 )
